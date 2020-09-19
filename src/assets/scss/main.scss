@@ -1,0 +1,25 @@
+// core
+@import "./utils/functions";
+@import "../../../node_modules/include-media/dist/include-media.scss";
+@import "./utils/variables";
+@import "./utils/mixins";
+
+// base
+@import "./base/base";
+
+// components
+@import "./components/card";
+@import "./components/button";
+@import "./components/button-icon";
+@import "./components/form";
+@import "./components/input-group";
+@import "./components/navbar";
+@import "./components/separator";
+@import "./components/movie-row";
+
+// layout
+@import "./layout/header";
+@import "./layout/footer";
+
+// bootstrap
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";

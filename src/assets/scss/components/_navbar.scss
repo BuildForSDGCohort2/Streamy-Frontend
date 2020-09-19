@@ -1,0 +1,33 @@
+.navbar-horizontal {
+  &.navbar-darmk {
+    background: rgba(0, 0, 0, 1);
+  }
+}
+
+.app-navbar {
+  // position: "fixed";
+  // z-index: 999;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // display: "flex";
+  // justify-content: "space-between";
+  // align-items: "center";
+  transition: all ease 0.5s;
+  &.navbar-black {
+    background: $black;
+  }
+
+  .nav-toggle {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    &:hover {
+      background: none;
+      border: none;
+    }
+    &::after {
+      display: none;
+    }
+  }
+}

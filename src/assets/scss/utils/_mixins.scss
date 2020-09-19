@@ -1,0 +1,444 @@
+// alert
+@mixin alert-variant($background, $border, $color) {
+  color: color-yiq($background);
+  @include gradient-bg($background);
+  border-color: $border;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+
+  .alert-link {
+    color: darken($color, 10%);
+  }
+}
+
+// badge
+@mixin badge-variant($bg) {
+  color: saturate(darken($bg, 10%), 10);
+  background-color: transparentize(lighten($bg, 25%), 0.5);
+
+  &[href] {
+    @include hover-focus {
+      color: color-yiq($bg);
+      text-decoration: none;
+      background-color: darken($bg, 10%);
+    }
+  }
+}
+
+// icon
+@mixin icon-shape-variant($color) {
+  color: saturate(darken($color, 10%), 10);
+  background-color: transparentize(lighten($color, 10%), 0.5);
+}
+
+// box-shadow
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    $result: ();
+
+    @each $value in $shadow {
+      @if $value != null {
+        $result: append($result, $value, "comma");
+      }
+      @if $value == none and length($shadow) > 1 {
+        @warn "The keyword 'none' must be used as a single argument.";
+      }
+    }
+
+    @if (length($result) > 0) {
+      box-shadow: $result;
+    }
+  }
+}
+
+// button
+@mixin button-variant(
+  $background,
+  $border,
+  $hover-background: darken($background, 0%),
+  $hover-border: darken($border, 0%),
+  $active-background: darken($background, 10%),
+  $active-border: darken($border, 0%)
+) {
+  color: color-yiq($background);
+  @include gradient-bg($background);
+  border-color: $border;
+  @include box-shadow($btn-box-shadow);
+
+  @include hover {
+    color: color-yiq($hover-background);
+    @include gradient-bg($hover-background);
+    border-color: $hover-border;
+  }
+
+  &:focus,
+  &.focus {
+    // Avoid using mixin so we can pass custom focus shadow properly
+    @if $enable-shadows {
+      box-shadow: $btn-box-shadow, 0 0 0 $btn-focus-width rgba($border, 0.5);
+    } @else {
+      box-shadow: 0 0 0 $btn-focus-width rgba($border, 0.5);
+    }
+  } // Disabled comes first so active can properly restyle
+  &.disabled,
+  &:disabled {
+    color: color-yiq($background);
+    background-color: $background;
+    border-color: $border;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: color-yiq($active-background);
+    background-color: $active-background;
+    @if $enable-gradients {
+      background-image: none; // Remove the gradient for the pressed/active state
+    }
+    border-color: $active-border;
+
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows {
+        box-shadow: $btn-active-box-shadow,
+          0 0 0 $btn-focus-width rgba($border, 0.5);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba($border, 0.5);
+      }
+    }
+  }
+}
+
+@mixin button-outline-variant(
+  $color,
+  $color-hover: color-yiq($color),
+  $active-background: $color,
+  $active-border: $color
+) {
+  color: $color;
+  background-color: transparent;
+  background-image: none;
+  border-color: $color;
+
+  &:hover {
+    color: $color-hover;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 $btn-focus-width rgba($color, 0.5);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: $color;
+    background-color: transparent;
+  }
+
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active,
+  .show > &.dropdown-toggle {
+    color: color-yiq($active-background);
+    background-color: $active-background;
+    border-color: $active-border;
+
+    &:focus {
+      // Avoid using mixin so we can pass custom focus shadow properly
+      @if $enable-shadows and $btn-active-box-shadow !=none {
+        box-shadow: $btn-active-box-shadow,
+          0 0 0 $btn-focus-width rgba($color, 0.5);
+      } @else {
+        box-shadow: 0 0 0 $btn-focus-width rgba($color, 0.5);
+      }
+    }
+  }
+}
+
+// Button sizes
+@mixin button-size(
+  $padding-y,
+  $padding-x,
+  $font-size,
+  $line-height,
+  $border-radius
+) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  line-height: $line-height; // Manually declare to provide an override to the browser default
+  @if $enable-rounded {
+    border-radius: $border-radius;
+  } @else {
+    border-radius: 0;
+  }
+}
+
+// form
+@mixin form-control-focus() {
+  &:focus {
+    color: $input-focus-color;
+    background-color: $input-focus-bg;
+    border-color: $input-focus-border-color;
+    outline: 0;
+    // Avoid using mixin so we can pass custom focus shadow properly
+    @if $enable-shadows {
+      box-shadow: $input-box-shadow, $input-focus-box-shadow;
+    } @else {
+      box-shadow: $input-focus-box-shadow;
+    }
+  }
+}
+
+@mixin form-validation-state($state, $color) {
+  .#{$state}-feedback {
+    display: none;
+    width: 100%;
+    margin-top: $form-feedback-margin-top;
+    font-size: $form-feedback-font-size;
+    color: $color;
+  }
+
+  .#{$state}-tooltip {
+    position: absolute;
+    top: 100%;
+    z-index: 5;
+    display: none;
+    max-width: 100%; // Contain to parent when possible
+    padding: 0.5rem;
+    margin-top: 0.1rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    color: #fff;
+    background-color: rgba($color, 0.8);
+    border-radius: 0.2rem;
+  }
+
+  .form-control,
+  .custom-select {
+    .was-validated &:#{$state},
+    &.is-#{$state} {
+      border-color: $color;
+
+      &:focus {
+        border-color: $color;
+        //box-shadow: 0 1px $input-focus-width 0 rgba($color, .75);
+      }
+
+      ~ .#{$state}-feedback,
+      ~ .#{$state}-tooltip {
+        display: block;
+      }
+    }
+  }
+
+  .form-check-input {
+    .was-validated &:#{$state},
+    &.is-#{$state} {
+      ~ .form-check-label {
+        color: $color;
+      }
+
+      ~ .#{$state}-feedback,
+      ~ .#{$state}-tooltip {
+        display: block;
+      }
+    }
+  }
+
+  .custom-control-input {
+    .was-validated &:#{$state},
+    &.is-#{$state} {
+      ~ .custom-control-label {
+        color: $color;
+
+        &::before {
+          background-color: lighten($color, 25%);
+          border-color: lighten($color, 25%);
+        }
+      }
+
+      ~ .#{$state}-feedback,
+      ~ .#{$state}-tooltip {
+        display: block;
+      }
+
+      &:checked {
+        ~ .custom-control-label::before {
+          @include gradient-bg(lighten($color, 10%));
+          border-color: lighten($color, 25%);
+        }
+      }
+
+      &:focus {
+        ~ .custom-control-label::before {
+          box-shadow: 0 0 0 1px $body-bg,
+            0 0 0 $input-focus-width rgba($color, 0.25);
+        }
+      }
+    }
+  }
+
+  // custom file
+  .custom-file-input {
+    .was-validated &:#{$state},
+    &.is-#{$state} {
+      ~ .custom-file-label {
+        border-color: $color;
+
+        &::before {
+          border-color: inherit;
+        }
+      }
+
+      ~ .#{$state}-feedback,
+      ~ .#{$state}-tooltip {
+        display: block;
+      }
+
+      &:focus {
+        ~ .custom-file-label {
+          box-shadow: 0 0 0 $input-focus-width rgba($color, 0.25);
+        }
+      }
+    }
+  }
+}
+
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px)
+//
+// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+
+// Name of the next breakpoint, or null for the last breakpoint.
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl))
+//    md
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map-keys($breakpoints)
+) {
+  $n: index($breakpoint-names, $name);
+  @return if(
+    $n < length($breakpoint-names),
+    nth($breakpoint-names, $n + 1),
+    null
+  );
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Maximum breakpoint width. Null for the largest (last) breakpoint.
+// The maximum value is calculated as the minimum of the next one less 0.02px
+// to work around the limitations of `min-` and `max-` prefixes and viewports with fractional widths.
+// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
+// See https://bugs.webkit.org/show_bug.cgi?id=178261
+//
+//    >> breakpoint-max(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    767.98px
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 0.02px, null);
+}
+
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px))
+//    "-sm"
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, "", "-#{$name}");
+}
+
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between(
+  $lower,
+  $upper,
+  $breakpoints: $grid-breakpoints
+) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($name, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($name, $breakpoints) {
+      @content;
+    }
+  }
+}
