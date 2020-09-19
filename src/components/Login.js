@@ -3,7 +3,7 @@ import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
 import { AuthContext } from "./AuthContext";
 import { useMutation, gql } from "@apollo/client";
 import SnackBar from "../components/Snackbar";
-import { IS_AUTHENTICATED } from "../index";
+import { IS_AUTHENTICATED } from "..";
 
 const LOGIN = gql`
   mutation($email: String, $password: String!) {

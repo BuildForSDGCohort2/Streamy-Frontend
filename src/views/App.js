@@ -27,7 +27,8 @@ export const ME = gql`
 `;
 
 function App() {
-  // const { loading, error, data } = useQuery(ME);
+  const { loading, error, data } = useQuery(ME);
+  const currentUser = data?.me;
 
   // if (loading) return <div>Loading</div>;
   // if (error) return <div>{error.message}</div>;
@@ -35,7 +36,7 @@ function App() {
 
   return (
     <div className="main-content">
-      <AppNavbar />
+      <AppNavbar user={currentUser} />
       <AppHeader />
       <MovieRow />
     </div>

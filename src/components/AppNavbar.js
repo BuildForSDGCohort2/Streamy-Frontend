@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Media, Dropdown } from "react-bootstrap";
+import { useApolloClient } from "@apollo/client";
+import { IS_AUTHENTICATED } from "..";
+import { Link } from "react-router-dom";
 
-export default function AppNavbar() {
+export default function AppNavbar({ user }) {
   const [blackNavbar, setBlackNavbar] = useState(false);
+  const client = useApolloClient();
 
   useEffect(() => {
     const scrollListener = () => {
@@ -18,6 +22,14 @@ export default function AppNavbar() {
       window.removeEventListener("scroll", scrollListener);
     };
   }, []);
+
+  const handleSignout = () => {
+    localStorage.removeItem("authToken");
+    client.writeQuery({
+      query: IS_AUTHENTICATED,
+      data: { isAuthenticated: false },
+    });
+  };
 
   return (
     <>
@@ -65,21 +77,33 @@ export default function AppNavbar() {
                       alt="..."
                       src={require("../assets/img/theme/team-4-800x800.jpg")}
                     />
+                    <Media className="ml-2 d-none d-lg-block">
+                      <span className="mb-0 text-sm font-weight-bold">
+                        {user?.firstName} {user?.lastName}
+                      </span>
+                    </Media>
                   </Media>
                 </Dropdown.Toggle>
               </span>
-              <span style={{ marginTop: "10px" }}>
+              {/* <span style={{ marginTop: "10px" }}>
                 <Media className="ml-2 d-none d-lg-block">
                   <span className="mb-0 text-sm font-weight-bold">
-                    Jessica Jones
+                    {user?.firstName} {user?.lastName}
                   </span>
                 </Media>
-              </span>
+              </span> */}
               <Dropdown.Menu>
                 <Dropdown.Header>Welcome!</Dropdown.Header>
                 <Dropdown.Item to="/admin/user-profile">
                   <i className="ni ni-single-02" />
-                  <span style={{ marginLeft: "10px" }}>My profile</span>
+                  <span style={{ marginLeft: "10px" }}>
+                    <Link
+                      to={`/profile/${user?.username}`}
+                      style={{ color: "#212529" }}
+                    >
+                      My profile
+                    </Link>
+                  </span>
                 </Dropdown.Item>
                 <Dropdown.Item to="/admin/user-profile">
                   <i className="ni ni-settings-gear-65" />
@@ -92,7 +116,12 @@ export default function AppNavbar() {
                   onClick={(e) => e.preventDefault()}
                 >
                   <i className="ni ni-user-run" />
-                  <span style={{ marginLeft: "10px" }}>Logout</span>
+                  <span
+                    style={{ marginLeft: "10px" }}
+                    onClick={() => handleSignout(client)}
+                  >
+                    Logout
+                  </span>
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>

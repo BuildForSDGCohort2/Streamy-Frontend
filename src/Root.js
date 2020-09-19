@@ -37,13 +37,15 @@ function Root() {
             <Redirect to="/login" />
           )}
         </Route>
-        <Route path="/movie">
+        {/* <Route path="/movie">
           <Home />
-        </Route>
+        </Route> */}
         <Route path="/app">
           {data.isAuthenticated ? <App /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/">{handleRedirect}</Route>
+        <Route path="/">
+          <Redirect to="/app" />
+        </Route>
       </Switch>
     </Router>
   );
