@@ -1,4 +1,4 @@
-.loading {
+.loader {
   position: fixed;
   left: 0;
   top: 0;
@@ -8,5 +8,132 @@
   background-color: $black;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+  }
+
+  &.loader-1 {
+    &::before,
+    &::after {
+      border-radius: 50%;
+      width: 7%;
+      height: 7%;
+      top: calc(50% - 15px);
+      left: calc(50% - 15px);
+      -webkit-animation-duration: 3s;
+      animation-duration: 3s;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+    }
+
+    &::before {
+      border-style: solid;
+      border-width: 3px 3px 3px 0;
+      border-color: $primary transparent transparent;
+      -webkit-transform: scale(0.3) rotate(0deg);
+      transform: scale(0.3) rotate(0deg);
+      opacity: 0.5;
+      -webkit-animation-name: foregroundCircle;
+      animation-name: foregroundCircle;
+    }
+
+    &::after {
+      background: $white;
+      opacity: 0.5;
+      -webkit-transform: scale(0);
+      transform: scale(0);
+      -webkit-animation-name: backgroundCircle;
+      animation-name: backgroundCircle;
+    }
+  }
+
+  @-webkit-keyframes foregroundCircle {
+    0% {
+      -webkit-transform: scale(0.3) rotate(0deg);
+      transform: scale(0.3) rotate(0deg);
+    }
+
+    12.5% {
+      -webkit-transform: scale(0.3) rotate(180deg);
+      transform: scale(0.3) rotate(180deg);
+    }
+
+    25%,
+    50% {
+      opacity: 1;
+    }
+
+    50% {
+      -webkit-transform: scale(1) rotate(720deg);
+      transform: scale(1) rotate(720deg);
+    }
+
+    100% {
+      -webkit-transform: scale(0.3) rotate(1800deg);
+      transform: scale(0.3) rotate(1800deg);
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes foregroundCircle {
+    0% {
+      -webkit-transform: scale(0.3) rotate(0deg);
+      transform: scale(0.3) rotate(0deg);
+    }
+
+    12.5% {
+      -webkit-transform: scale(0.3) rotate(180deg);
+      transform: scale(0.3) rotate(180deg);
+    }
+
+    25%,
+    50% {
+      opacity: 1;
+    }
+
+    50% {
+      -webkit-transform: scale(1) rotate(720deg);
+      transform: scale(1) rotate(720deg);
+    }
+
+    100% {
+      -webkit-transform: scale(0.3) rotate(1800deg);
+      transform: scale(0.3) rotate(1800deg);
+      opacity: 0.5;
+    }
+  }
+
+  @-webkit-keyframes backgroundCircle {
+    12.5% {
+      -webkit-transform: scale(0.3);
+      transform: scale(0.3);
+    }
+
+    90%,
+    100% {
+      -webkit-transform: scale(2);
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes backgroundCircle {
+    12.5% {
+      -webkit-transform: scale(0.3);
+      transform: scale(0.3);
+    }
+
+    90%,
+    100% {
+      -webkit-transform: scale(2);
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
 }

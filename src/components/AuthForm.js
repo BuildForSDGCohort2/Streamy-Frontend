@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import AuthProvider from "./AuthContext";
+import AuthProvider from "../context/AuthContext";
 
 export default function AuthForm() {
   let { id } = useParams();

@@ -1,0 +1,183 @@
+.wrap {
+  position: relative;
+  // display: flex;
+  display: inline-block;
+  width: 650px;
+  height: 315px;
+  background: #171a1f;
+  border-radius: 5px;
+  transition: all ease 0.5s;
+  // margin-right: 10px;
+  margin-left: -3.9%;
+  padding: 0;
+
+  @include media(">phone", "<tablet") {
+    width: 7%;
+    margin-left: -2.9%;
+    margin-top: 20px;
+    z-index: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .single-movie-item {
+    position: absolute;
+    width: 180px;
+    height: 315px;
+    transition: all ease 0.3s;
+    border-radius: 7px;
+    transform: translate(10%, -10%);
+
+    &:hover {
+      transform: scale(1);
+    }
+
+    @include media(">phone", "<tablet") {
+      width: 150px;
+      height: 250px;
+      border-radius: 4px;
+    }
+  }
+
+  .info-close {
+    display: flex;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .movie-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: 14rem;
+    margin-top: 25px;
+    padding-right: 20px;
+
+    @include media(">phone", "<tablet") {
+      margin-left: 10px;
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .rating {
+      display: flex;
+      margin: -5px 0 0 15px;
+    }
+    .description {
+      color: $gray-500;
+    }
+
+    hr {
+      margin-bottom: 20px;
+    }
+
+    .info-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .btn-trailer {
+        cursor: pointer;
+        text-decoration: underline;
+        color: $primary;
+
+        &:hover {
+          opacity: 0.7;
+        }
+
+        .trailer-icon {
+          margin-right: 10px;
+          color: $primary;
+        }
+        .trailer-text {
+          padding-right: 12px;
+          font-size: 13px;
+          color: $primary;
+        }
+      }
+
+      .btn-like {
+        color: $red;
+        cursor: pointer;
+        margin-right: 15px;
+
+        &:hover {
+          opacity: 0.8;
+        }
+
+        .like-text {
+          padding-left: 7px;
+        }
+      }
+
+      .btn-play {
+        padding: 7px 10px;
+        @include media(">phone", "<tablet") {
+          padding: 7px 10px;
+        }
+        .btn-icon {
+          padding: 7px 12px;
+          font-size: 16px;
+        }
+        .btn-text {
+          padding-right: 12px;
+        }
+      }
+    }
+  }
+}
+// .item-info-background {
+//   background: #171a1f;
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   right: 0;
+//   bottom: 0;
+//   width: 650px;
+//   height: 350px;
+//   z-index: -1;
+//   border-radius: 7px;
+//   transform: scale(0.9);
+//   transition: all ease 0.5s;
+// }
+
+// .wrap:hover {
+//   .single-movie-item {
+//     transform: translate(23%, -10%) scale(0.9);
+//   }
+//   .overlay {
+//     animation: movieTitle 0.5s forwards;
+//     opacity: 0;
+//   }
+//   .item-info-background {
+//     transform: scale(1);
+//   }
+// }
+
+@keyframes movieTitle {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+
+  50% {
+    font-size: 18px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    font-size: 30px;
+    opacity: 1;
+    background: none;
+    margin: 4rem 0 0 14rem;
+  }
+}

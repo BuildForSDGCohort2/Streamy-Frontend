@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import AppNavbar from "../components/AppNavbar";
 
-export default function Profile({ user }) {
+export default function Profile() {
+  const user = useContext(UserContext);
   return (
     <>
+      <AppNavbar />
       <div>
         <h3>
           {user?.firstName} {user?.lastName}

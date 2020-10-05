@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Nav, Container, Media, Dropdown } from "react-bootstrap";
 import { useApolloClient } from "@apollo/client";
 import { IS_AUTHENTICATED } from "..";
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
-export default function AppNavbar({ user }) {
+export default function AppNavbar() {
   const [blackNavbar, setBlackNavbar] = useState(false);
   const client = useApolloClient();
+
+  const user = useContext(UserContext);
 
   useEffect(() => {
     const scrollListener = () => {
@@ -73,7 +76,7 @@ export default function AppNavbar({ user }) {
                     <img
                       width={48}
                       height={48}
-                      className="rounded-circle"
+                      className="rounded-circle user-avatar"
                       alt="..."
                       src={require("../assets/img/theme/team-4-800x800.jpg")}
                     />
@@ -111,10 +114,7 @@ export default function AppNavbar({ user }) {
                 </Dropdown.Item>
 
                 <Dropdown.Divider />
-                <Dropdown.Item
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                >
+                <Dropdown.Item onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
                   <span
                     style={{ marginLeft: "10px" }}

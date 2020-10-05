@@ -48,7 +48,7 @@
         font-weight: bold;
 
         @include media(">phone", "<tablet") {
-          font-size: 35px;
+          font-size: 30px;
         }
       }
 
@@ -58,7 +58,7 @@
         padding-left: 30px;
 
         @include media(">phone", "<tablet") {
-          margin-top: 20px;
+          margin-top: 14px;
           padding-left: 15px;
         }
       }

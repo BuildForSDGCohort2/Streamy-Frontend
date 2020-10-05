@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useMutation, gql } from "@apollo/client";
 import SnackBar from "../components/Snackbar";
 import { IS_AUTHENTICATED } from "..";
@@ -22,7 +22,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [status, setStatus] = useContext(AuthContext);
+  const { status } = useContext(AuthContext);
 
   const handleSubmit = async (event, tokenAuth, client) => {
     event.preventDefault();

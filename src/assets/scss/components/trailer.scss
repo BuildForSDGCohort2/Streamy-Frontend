@@ -1,0 +1,81 @@
+.trailer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color: #000000, $alpha: 0.85);
+  margin: auto;
+  z-index: 9999;
+  cursor: pointer;
+
+  .inner {
+    // position: relative;
+    // width: 100%;
+    // height: 100%;
+    // max-width: 100%;
+    max-width: 80vh;
+    max-height: 100vh;
+    cursor: default;
+    // margin: auto;
+    // padding: 0 10px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+
+    .player-wrapper {
+      position: relative;
+      z-index: 1;
+
+      &.trailer-player {
+        width: 90vmin;
+        max-width: 100%;
+        background-color: #000;
+        padding-bottom: 56.3%;
+
+        @include media(">phone", "<tablet") {
+          width: 100vmin;
+        }
+      }
+
+      .player {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 1;
+        overflow: hidden;
+        font-size: 0.4em;
+      }
+    }
+
+    // .player,
+    // video {
+    //   // position: absolute;
+    //   // width: 650px;
+    //   // height: 300px;
+
+    //   @include media("<desktop") {
+    //     // width: 100% !important;
+    //     // height: 100% !important;
+    //     // top: 0;
+    //     // left: 0;
+    //   }
+    // }
+
+    .trailer-close {
+      display: flex;
+      position: absolute;
+      right: 0;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+}

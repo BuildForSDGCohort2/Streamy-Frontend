@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 const REGISTER_USER = gql`
   mutation(
@@ -44,7 +44,7 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
 
   // change login state - defaults to "error"
-  const [status, setStatus] = useContext(AuthContext);
+  const { setStatus } = useContext(AuthContext);
 
   // use history to redirect to login page on successful registration
   const history = useHistory();
