@@ -10,7 +10,7 @@ export default function AppNavbar({ setSearchResults }) {
   const [blackNavbar, setBlackNavbar] = useState(false);
   const client = useApolloClient();
 
-  const user = useContext(UserContext);
+  const { currentUser: user } = useContext(UserContext);
 
   useEffect(() => {
     const scrollListener = () => {

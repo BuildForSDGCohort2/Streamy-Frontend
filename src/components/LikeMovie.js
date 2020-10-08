@@ -41,7 +41,7 @@ const UPDATE_LIKE = gql`
 `;
 
 export default function LikeMovie({ movieId, likeCount }) {
-  const currentUser = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const userlikes = currentUser.likeSet;
 
   const isMovieLiked =

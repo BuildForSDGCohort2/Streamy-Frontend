@@ -83,7 +83,6 @@ export default function Search({ setSearchResults }) {
             <InputGroup.Append>
               <Button
                 // type="submit"
-                onClick={clearSearchInput}
                 style={{
                   backgroundColor: "#333",
                   border: 0,

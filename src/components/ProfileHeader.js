@@ -3,7 +3,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
 
 export default function ProfileHeader() {
-  const user = useContext(UserContext);
+  const { currentUser: user } = useContext(UserContext);
   return (
     <>
       <div

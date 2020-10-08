@@ -7,11 +7,7 @@ import ReactPlayer from "react-player";
 export default function TrailerPlayer() {
   const { showTrailer, trailerUrl, setShowTrailer } = useContext(PlayerContext);
 
-  // useEffect(() => {
-  //   setShowTrailer(false);
-  // }, []);
-
-  const url = "https://www.youtube.com/watch?v=oUFJJNQGwhk";
+  // const url = "https://www.youtube.com/watch?v=oUFJJNQGwhk";
   // const trailerUrls =
   //   "https://s3.amazonaws.com/codecademy-content/courses/React/react_video-fast.mp4";
 

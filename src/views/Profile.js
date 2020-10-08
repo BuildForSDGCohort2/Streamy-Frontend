@@ -63,7 +63,7 @@ const DELETE_ACCOUNT = gql`
 `;
 
 export default function Profile() {
-  const user = useContext(UserContext);
+  const { userLoading, userError, currentUser: user } = useContext(UserContext);
   const client = useApolloClient();
 
   const [
@@ -452,7 +452,7 @@ export default function Profile() {
                               </InputGroup.Text>
                             </InputGroup.Prepend>
                             <Form.Control
-                              id="new-password"
+                              id="cfrm-password"
                               type="password"
                               placeholder="Confirm Password"
                               onChange={(event) =>
@@ -550,6 +550,9 @@ export default function Profile() {
           </Col>
         </Row>
       </Container>
+
+      {userLoading && <Loader />}
+      {userError && <Error message={userError.message} />}
 
       <AuthFooter />
     </>

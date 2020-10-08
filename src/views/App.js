@@ -38,8 +38,8 @@ function App() {
 
   const movies = searchResults.length > 0 ? searchResults : data?.movies;
 
-  if (loading) return <Loader />;
-  if (error) return <Error message={error.message} />;
+  // if (loading) return <Loader />;
+  // if (error) return <Error message={error.message} />;
 
   return (
     <div className="main-content">
@@ -59,6 +59,8 @@ function App() {
           <AuthFooter />{" "}
         </PlayerProvider>
       )}
+      {loading && <Loader />}
+      {error && <Error message={error.message} />}
     </div>
   );
 }

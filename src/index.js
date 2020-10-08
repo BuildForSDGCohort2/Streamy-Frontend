@@ -34,8 +34,10 @@ export const client = new ApolloClient({
     headers: {
       authorization: `JWT ${localStorage.getItem("authToken") || ""}`,
     },
-    uri: "http://127.0.0.1:8000/graphql/",
-    // uri: "https://streamyapp.herokuapp.com/graphql/",
+    uri:
+      process.env.NODE_ENV === "development"
+        ? "http://127.0.0.1:8000/graphql/"
+        : "https://streamyapp.herokuapp.com/graphql/",
   }),
 });
 

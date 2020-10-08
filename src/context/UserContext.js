@@ -1,7 +1,5 @@
 import React, { createContext } from "react";
 import { gql, useQuery } from "@apollo/client";
-import Loader from "../components/Loader";
-import Error from "../components/Error";
 
 export const ME = gql`
   {
@@ -27,12 +25,11 @@ export default function UserProvider({ children }) {
     fetchPolicy: "cache-and-network",
   });
 
-  if (userLoading) return <Loader />;
-  if (userError) return <Error message={userError.message} />;
-
   const currentUser = data?.me;
 
   return (
-    <UserContext.Provider value={currentUser}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ userLoading, userError, currentUser }}>
+      {children}
+    </UserContext.Provider>
   );
 }
