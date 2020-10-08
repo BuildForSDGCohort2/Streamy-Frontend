@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { useMutation, gql } from "@apollo/client";
 import SnackBar from "../components/Snackbar";
 import { IS_AUTHENTICATED } from "..";
@@ -16,13 +16,13 @@ const LOGIN = gql`
 export default function Login() {
   const [
     tokenAuth,
-    { loading: mutationLoading, error: mutationError, called, client },
+    { loading: mutationLoading, error: mutationError, client },
   ] = useMutation(LOGIN);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [status, setStatus] = useContext(AuthContext);
+  const { status } = useContext(AuthContext);
 
   const handleSubmit = async (event, tokenAuth, client) => {
     event.preventDefault();
@@ -37,8 +37,6 @@ export default function Login() {
       query: IS_AUTHENTICATED,
       data: { isAuthenticated: true },
     });
-
-    console.log({ res });
   };
 
   return (

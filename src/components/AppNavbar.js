@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Navbar, Nav, Container, Media, Dropdown } from "react-bootstrap";
 import { useApolloClient } from "@apollo/client";
 import { IS_AUTHENTICATED } from "..";
-import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import Search from "./Search";
+// import { Input } from "@material-ui/core";
 
-export default function AppNavbar({ user }) {
+export default function AppNavbar({ setSearchResults }) {
   const [blackNavbar, setBlackNavbar] = useState(false);
   const client = useApolloClient();
+
+  const { currentUser: user } = useContext(UserContext);
 
   useEffect(() => {
     const scrollListener = () => {
@@ -53,27 +57,18 @@ export default function AppNavbar({ user }) {
               Streamy
             </span>
           </Navbar.Brand>
-          {/* <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-              <FormGroup className="mb-0">
-                <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="fas fa-search" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input placeholder="Search" type="text" />
-                </InputGroup>
-              </FormGroup>
-            </Form> */}
-          <Nav className="align-items-center d-none d-md-flex">
-            <Dropdown alignRight style={{ display: "flex" }}>
+
+          <Nav className="align-items-center d-sm-flex d-md-flex" navbar>
+            <Search setSearchResults={setSearchResults} />
+
+            <Dropdown alignRight>
               <span>
                 <Dropdown.Toggle className="p-0 nav-toggle">
                   <Media className="align-items-center">
                     <img
                       width={48}
                       height={48}
-                      className="rounded-circle"
+                      className="rounded-circle user-avatar"
                       alt="..."
                       src={require("../assets/img/theme/team-4-800x800.jpg")}
                     />
@@ -85,36 +80,24 @@ export default function AppNavbar({ user }) {
                   </Media>
                 </Dropdown.Toggle>
               </span>
-              {/* <span style={{ marginTop: "10px" }}>
-                <Media className="ml-2 d-none d-lg-block">
-                  <span className="mb-0 text-sm font-weight-bold">
-                    {user?.firstName} {user?.lastName}
-                  </span>
-                </Media>
-              </span> */}
-              <Dropdown.Menu>
+
+              <Dropdown.Menu style={{ position: "absolute" }}>
                 <Dropdown.Header>Welcome!</Dropdown.Header>
-                <Dropdown.Item to="/admin/user-profile">
+                <Dropdown.Item href={`/profile/${user?.username}`}>
                   <i className="ni ni-single-02" />
-                  <span style={{ marginLeft: "10px" }}>
-                    <Link
-                      to={`/profile/${user?.username}`}
-                      style={{ color: "#212529" }}
-                    >
-                      My profile
-                    </Link>
+                  <span style={{ marginLeft: "10px", color: "#212529" }}>
+                    My profile
                   </span>
                 </Dropdown.Item>
-                <Dropdown.Item to="/admin/user-profile">
+                <Dropdown.Item href={`/profile/${user?.username}`}>
                   <i className="ni ni-settings-gear-65" />
-                  <span style={{ marginLeft: "10px" }}>Settings</span>
+                  <span style={{ marginLeft: "10px", color: "#212529" }}>
+                    Settings
+                  </span>
                 </Dropdown.Item>
 
                 <Dropdown.Divider />
-                <Dropdown.Item
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                >
+                <Dropdown.Item onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
                   <span
                     style={{ marginLeft: "10px" }}

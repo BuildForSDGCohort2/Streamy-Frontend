@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
+import { PlayerContext } from "../context/PlayerContext";
+import Player from "./Player";
 
-export default function AppHeader() {
+const movieTrailer = require("movie-trailer");
+
+export default function AppHeader({ title, description, year, rating, cover }) {
+  let movieDescription = description;
+  if (movieDescription?.length > 400) {
+    movieDescription = movieDescription.substring(0, 400) + "...";
+  }
+
+  const {
+    setShowTrailer,
+    trailerUrl,
+    setTrailerUrl,
+    setShowMovie,
+    showMovie,
+  } = useContext(PlayerContext);
+
+  const handleTrailer = (title) => {
+    movieTrailer(title || "", { multi: true })
+      .then((url) => {
+        setTrailerUrl(url);
+        setShowTrailer(trailerUrl ? true : false);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <>
       <div
@@ -9,7 +35,7 @@ export default function AppHeader() {
         style={{
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundImage: `url(https://occ-0-299-300.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXTEB_bMQOF6HvgQ4KwAShgsOwzR0aSWg8gRfRx4l9dKHLbspSRoK6n9bAC__2C7rcK4yTYVZiwxm-Vzy6vYnVdKJleg.jpg?r=b3b)`,
+          backgroundImage: `url(${cover})`,
         }}
       >
         <div className="gradient-vertical ">
@@ -18,10 +44,10 @@ export default function AppHeader() {
               <Row>
                 <Col lg="7" md="10">
                   <div style={{ display: "flex" }}>
-                    <div className="title">Lucifer</div>
+                    <div className="title">{title}</div>
 
                     <div className="rating">
-                      {Array(4)
+                      {Array(rating)
                         .fill()
                         .map((_, i) => (
                           <p key={i}>
@@ -32,23 +58,17 @@ export default function AppHeader() {
                         ))}
                     </div>
                   </div>
-                  <small className="year">2020</small>
+                  <small className="year">{year}</small>
                   <div className="description">
-                    <p className="">
-                      27 years after the first meeting of the guys with the
-                      demonic Pennywise. They have already grown, and each has
-                      its own life. But suddenly their quiet existence is
-                      disturbed by a strange phone call that forces them to come
-                      together again. 27 years after the first meeting of the
-                      guys with the demonic Pennywise. They have already grown,
-                      and each has its own life. But suddenly their quiet
-                      existence is disturbed by a strange phone call that forces
-                      them to come together again.
-                    </p>
+                    <p className="">{movieDescription}</p>
                   </div>
 
                   <div className="buttonRow">
-                    <Button className="btn-play" type="submit">
+                    <Button
+                      className="btn-play"
+                      type="submit"
+                      onClick={() => setShowMovie(true)}
+                    >
                       <span className="btn-icon">
                         <i className="fa fa-play" />
                       </span>
@@ -61,12 +81,17 @@ export default function AppHeader() {
                       <span className="btn-text">More</span>
                     </button>
                   </div>
-                  <div className="btn-trailer">
+                  <div
+                    className="btn-trailer"
+                    onClick={() => handleTrailer(title)}
+                  >
                     <span className="trailer-icon">
                       <i className="fa fa-film"></i>
                     </span>
                     <span className="trailer-text">Watch Trailer</span>
                   </div>
+                  {trailerUrl || (showMovie && <Player />)}
+                  {/* <Player trailerUrl={trailerUrl} /> */}
                 </Col>
               </Row>
             </Container>

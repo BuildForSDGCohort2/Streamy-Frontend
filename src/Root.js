@@ -10,14 +10,11 @@ import {
 import App from "./views/App";
 import { IS_AUTHENTICATED } from ".";
 import Profile from "./views/Profile";
-import { ME } from "./views/App";
-import Home from "./views/Home";
+import UserProvider from "./context/UserContext";
+import Loader from "./components/Loader";
 
 function Root() {
   const { data } = useQuery(IS_AUTHENTICATED);
-  const { data: medata } = useQuery(ME);
-
-  const currentUser = medata?.me;
 
   const handleRedirect = () => {
     return data.isAuthenticated ? <Redirect to="/app" /> : <Auth />;
@@ -25,28 +22,26 @@ function Root() {
 
   return (
     <Router>
-      <Switch>
-        <Route path="/login">{handleRedirect}</Route>
-        <Route path="/register">
-          <Auth />
-        </Route>
-        <Route path={`/profile/:id`}>
-          {data.isAuthenticated ? (
-            <Profile user={currentUser} />
-          ) : (
-            <Redirect to="/login" />
-          )}
-        </Route>
-        {/* <Route path="/movie">
-          <Home />
-        </Route> */}
-        <Route path="/app">
-          {data.isAuthenticated ? <App /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/">
-          <Redirect to="/app" />
-        </Route>
-      </Switch>
+      <UserProvider>
+        <Switch>
+          <Route path="/login">{handleRedirect}</Route>
+          <Route path="/register">
+            <Auth />
+          </Route>
+          <Route path={`/profile/:id`}>
+            {data.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/movie">
+            <Loader />
+          </Route>
+          <Route path="/app">
+            {data.isAuthenticated ? <App /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/">
+            <Redirect to="/app" />
+          </Route>
+        </Switch>
+      </UserProvider>
     </Router>
   );
 }

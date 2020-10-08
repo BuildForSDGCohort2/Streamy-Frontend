@@ -1,0 +1,15 @@
+.profile {
+  @include media(">tablet") {
+    padding: 0 30px !important;
+  }
+}
+
+h3 {
+  color: $white !important;
+}
+
+div {
+  &.h5 {
+    color: $white !important;
+  }
+}

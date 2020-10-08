@@ -4,6 +4,13 @@
   }
 }
 
+.header-signin-btn {
+  color: #fff !important;
+  padding-top: 5px;
+  border-radius: 5px;
+  background: $primary;
+}
+
 .app-navbar {
   // position: "fixed";
   // z-index: 999;
@@ -16,6 +23,13 @@
   transition: all ease 0.5s;
   &.navbar-black {
     background: $black;
+  }
+
+  .user-avatar {
+    @include media(">phone", "<tablet") {
+      width: 32px;
+      height: 32px;
+    }
   }
 
   .nav-toggle {

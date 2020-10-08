@@ -6,7 +6,7 @@ import "./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/scss/main.scss";
 
 import Root from "./Root";
-// import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./serviceWorker";
 
 import {
   ApolloProvider,
@@ -16,29 +16,17 @@ import {
   HttpLink,
 } from "@apollo/client";
 
-const cache = new InMemoryCache();
-
-// const client = new ApolloClient({
-//   uri: "http://127.0.0.1:8000/graphql/",
-//   // uri: "https://streamyapp.herokuapp.com/graphql/",
-//   fetchOptions: {
-//     credentials: "include",
-//   },
-//   request: (operation) => {
-//     const token = localStorage.getItem("authToken") || "";
-//     operation.setContext({
-//       headers: {
-//         Authorization: `JWT ${token}`,
-//       },
-//     });
-//   },
-//   clientState: {
-//     defaults: {
-//       isAuthenticated: !!localStorage.getItem("authToken"),
-//     },
-//   },
-//   cache,
-// });
+const cache = new InMemoryCache({
+  typePolicies: {
+    MovieType: {
+      fields: {
+        likes: {
+          merge: false,
+        },
+      },
+    },
+  },
+});
 
 export const client = new ApolloClient({
   cache,
@@ -46,7 +34,10 @@ export const client = new ApolloClient({
     headers: {
       authorization: `JWT ${localStorage.getItem("authToken") || ""}`,
     },
-    uri: "http://127.0.0.1:8000/graphql/",
+    uri:
+      process.env.NODE_ENV === "development"
+        ? "http://127.0.0.1:8000/graphql/"
+        : "https://streamyapp.herokuapp.com/graphql/",
   }),
 });
 
@@ -56,7 +47,7 @@ export const IS_AUTHENTICATED = gql`
   }
 `;
 
-client.writeQuery({
+cache.writeQuery({
   query: IS_AUTHENTICATED,
   data: {
     isAuthenticated: !!localStorage.getItem("authToken"),
@@ -75,4 +66,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+serviceWorker.unregister();

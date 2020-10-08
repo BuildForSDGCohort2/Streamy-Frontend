@@ -61,7 +61,7 @@
     }
   }
   .list {
-    width: 999999999px;
+    // width: 999999999px;
     transition: all ease 0.5s;
 
     .item {
@@ -73,6 +73,14 @@
       transform: scale(0.9);
       transition: all ease 0.3s;
       border-radius: 7px;
+      z-index: 1;
+
+      &.transform {
+        transform: translate(7%) scale(0.9);
+        .details {
+          display: none;
+        }
+      }
 
       &:hover {
         transform: scale(1);

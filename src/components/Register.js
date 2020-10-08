@@ -3,7 +3,7 @@ import React, { useState, useContext } from "react";
 import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 const REGISTER_USER = gql`
   mutation(
@@ -33,7 +33,7 @@ const REGISTER_USER = gql`
 export default function Register() {
   const [
     register,
-    { loading: mutationLoading, error: mutationError, data },
+    { loading: mutationLoading, error: mutationError },
   ] = useMutation(REGISTER_USER);
 
   const [firstname, setFirstname] = useState("");
@@ -44,14 +44,14 @@ export default function Register() {
   const [password2, setPassword2] = useState("");
 
   // change login state - defaults to "error"
-  const [status, setStatus] = useContext(AuthContext);
+  const { setStatus } = useContext(AuthContext);
 
   // use history to redirect to login page on successful registration
   const history = useHistory();
 
   const handleSubmit = async (event, register) => {
     event.preventDefault();
-    const res = await register({
+    await register({
       variables: {
         firstname,
         lastname,
@@ -63,6 +63,7 @@ export default function Register() {
     });
 
     setStatus("success");
+
     history.push("/login");
   };
 
@@ -86,7 +87,7 @@ export default function Register() {
                     src={require("../assets/img/icons/github.svg")}
                   />
                 </span>
-                <span className="btn-inner--text">Github</span>
+                <span className="btn-inner--text">Facebook</span>
               </Button>
 
               <Button

@@ -40,15 +40,7 @@ export default function AuthNavbar() {
             </span>
           </Navbar.Brand>
           <Nav className="justify-content-end">
-            <Nav.Link
-              href="/login"
-              style={{
-                color: "#fff",
-                paddingTop: "5px",
-                borderRadius: "5px",
-                background: "#5e72e4",
-              }}
-            >
+            <Nav.Link href="/login" className="header-signin-btn">
               <i className="ni ni-single-02 mr-2" />
               <span>Sign in</span>
             </Nav.Link>
