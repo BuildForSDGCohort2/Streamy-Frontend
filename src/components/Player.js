@@ -5,5 +5,6 @@ import MoviePlayer from "./MoviePlayer";
 
 export default function Player() {
   const { showTrailer, showMovie } = useContext(PlayerContext);
+
   return showTrailer ? <TrailerPlayer /> : showMovie ? <MoviePlayer /> : null;
 }

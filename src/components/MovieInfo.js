@@ -90,7 +90,11 @@ export default function MovieInfo() {
                 movieId={movieItem.id}
                 likeCount={movieItem.likes.length}
               />
-              <Button className="btn-play" type="submit">
+              <Button
+                className="btn-play"
+                type="submit"
+                onClick={() => setShowMovie(true)}
+              >
                 <span className="btn-icon">
                   <i className="fa fa-play" />
                 </span>

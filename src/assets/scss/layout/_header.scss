@@ -16,6 +16,28 @@
   }
 }
 
+.profile-header {
+  position: relative;
+
+  @include media(">tablet") {
+    padding: 0 30px !important;
+  }
+
+  // .mask {
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   height: 100%;
+  //   width: 100%;
+  //   opacity: 0.9;
+  //   transition: 0.5s ease;
+
+  //   &.bg-gradient-default {
+  //     background: linear-gradient(87deg, #172b4d, #1a174d);
+  //   }
+  // }
+}
+
 .featured {
   height: 100vh;
   .gradient-vertical {

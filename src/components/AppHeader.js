@@ -16,6 +16,7 @@ export default function AppHeader({ title, description, year, rating, cover }) {
     trailerUrl,
     setTrailerUrl,
     setShowMovie,
+    showMovie,
   } = useContext(PlayerContext);
 
   const handleTrailer = (title) => {
@@ -63,7 +64,11 @@ export default function AppHeader({ title, description, year, rating, cover }) {
                   </div>
 
                   <div className="buttonRow">
-                    <Button className="btn-play" type="submit">
+                    <Button
+                      className="btn-play"
+                      type="submit"
+                      onClick={() => setShowMovie(true)}
+                    >
                       <span className="btn-icon">
                         <i className="fa fa-play" />
                       </span>
@@ -85,7 +90,7 @@ export default function AppHeader({ title, description, year, rating, cover }) {
                     </span>
                     <span className="trailer-text">Watch Trailer</span>
                   </div>
-                  {trailerUrl && <Player />}
+                  {trailerUrl || (showMovie && <Player />)}
                   {/* <Player trailerUrl={trailerUrl} /> */}
                 </Col>
               </Row>

@@ -10,8 +10,8 @@ import {
 import App from "./views/App";
 import { IS_AUTHENTICATED } from ".";
 import Profile from "./views/Profile";
-import Home from "./views/Home";
 import UserProvider from "./context/UserContext";
+import Loader from "./components/Loader";
 
 function Root() {
   const { data } = useQuery(IS_AUTHENTICATED);
@@ -32,7 +32,7 @@ function Root() {
             {data.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
           </Route>
           <Route path="/movie">
-            <Home />
+            <Loader />
           </Route>
           <Route path="/app">
             {data.isAuthenticated ? <App /> : <Redirect to="/login" />}

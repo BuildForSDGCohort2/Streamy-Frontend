@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import AppNavbar from "../components/AppNavbar";
 import AppHeader from "../components/AppHeader";
@@ -34,13 +34,16 @@ function App() {
   let random = Math.floor(Math.random() * (data?.movies.length - 1));
   let chosen = data?.movies[random];
 
-  // if (loading) return <div>Loading</div>;
-  // if (error) return <div>{error.message}</div>;
-  // if (!data) return <div>Not Found</div>;
+  const [searchResults, setSearchResults] = useState([]);
+
+  const movies = searchResults.length > 0 ? searchResults : data?.movies;
+
+  if (loading) return <Loader />;
+  if (error) return <Error message={error.message} />;
 
   return (
     <div className="main-content">
-      <AppNavbar />
+      <AppNavbar setSearchResults={setSearchResults} />
       {data?.movies.length > 0 && (
         <PlayerProvider>
           <AppHeader
@@ -51,13 +54,11 @@ function App() {
             cover={chosen?.cover}
           />
           <MovieProvider>
-            <MovieRow movies={data?.movies} />
+            <MovieRow movies={movies} />
           </MovieProvider>
           <AuthFooter />{" "}
         </PlayerProvider>
       )}
-      {loading && <Loader />}
-      {error && <Error message={error.message} />}
     </div>
   );
 }

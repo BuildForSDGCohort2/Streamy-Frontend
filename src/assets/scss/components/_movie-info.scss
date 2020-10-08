@@ -8,12 +8,12 @@
   border-radius: 5px;
   transition: all ease 0.5s;
   // margin-right: 10px;
-  margin-left: -3.9%;
+  margin-left: -195px;
   padding: 0;
 
   @include media(">phone", "<tablet") {
-    width: 7%;
-    margin-left: -2.9%;
+    width: 355px;
+    margin-left: -150px;
     margin-top: 20px;
     z-index: 1;
     align-items: center;

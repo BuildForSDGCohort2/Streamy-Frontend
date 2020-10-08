@@ -1,5 +1,7 @@
 import React, { createContext } from "react";
 import { gql, useQuery } from "@apollo/client";
+import Loader from "../components/Loader";
+import Error from "../components/Error";
 
 export const ME = gql`
   {
@@ -21,9 +23,13 @@ export const ME = gql`
 export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-  const { loading, error, data } = useQuery(ME, {
+  const { loading: userLoading, error: userError, data } = useQuery(ME, {
     fetchPolicy: "cache-and-network",
   });
+
+  if (userLoading) return <Loader />;
+  if (userError) return <Error message={userError.message} />;
+
   const currentUser = data?.me;
 
   return (

@@ -16,7 +16,7 @@ const LOGIN = gql`
 export default function Login() {
   const [
     tokenAuth,
-    { loading: mutationLoading, error: mutationError, called, client },
+    { loading: mutationLoading, error: mutationError, client },
   ] = useMutation(LOGIN);
 
   const [email, setEmail] = useState("");
@@ -37,8 +37,6 @@ export default function Login() {
       query: IS_AUTHENTICATED,
       data: { isAuthenticated: true },
     });
-
-    console.log({ res });
   };
 
   return (

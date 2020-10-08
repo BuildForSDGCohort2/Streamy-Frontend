@@ -14,7 +14,7 @@ export default function MovieRow({ movies }) {
 
   const handleRightNav = () => {
     let x = scrollX - Math.round(window.innerWidth / 2);
-    let listW = movies?.length * 500;
+    let listW = movies?.length * window.innerWidth;
 
     if (window.innerWidth - listW > x) {
       x = window.innerWidth - listW - 60;
@@ -38,7 +38,7 @@ export default function MovieRow({ movies }) {
             className="list"
             style={{
               marginLeft: scrollX,
-              width: `${movies?.length * 500}px`,
+              width: movies?.length * window.innerWidth,
             }}
           >
             {movies?.length > 0 &&
