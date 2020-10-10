@@ -102,6 +102,7 @@
           font-size: 13px;
           color: $gray-300;
         }
+
         @include media(">tablet", "<desktop") {
           max-width: 80%;
           // margin-bottom: 30px;

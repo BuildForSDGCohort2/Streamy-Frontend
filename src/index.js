@@ -25,6 +25,13 @@ const cache = new InMemoryCache({
         },
       },
     },
+    // UserType: {
+    // fields: {
+    //   me: {
+    //     merge: false,
+    //   },
+    // },
+    // },
   },
 });
 

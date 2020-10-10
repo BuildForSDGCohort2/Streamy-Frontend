@@ -63,9 +63,23 @@ export default function MovieInfo() {
                   .fill()
                   .map((_, i) => (
                     <p key={i}>
-                      <span role="img" aria-label="star">
-                        ⭐
-                      </span>
+                      {/* <span role="img" aria-label="star">
+                              ⭐
+                            </span> */}
+                      <i
+                        className="fa fa-star"
+                        style={{ color: "#FFA500", fontSize: "14px" }}
+                      />
+                    </p>
+                  ))}
+                {Array(5 - movieItem.rating)
+                  .fill()
+                  .map((_, i) => (
+                    <p key={i}>
+                      <i
+                        className="fa fa-star"
+                        style={{ color: "#B0B0B0", fontSize: "14px" }}
+                      />
                     </p>
                   ))}
               </div>

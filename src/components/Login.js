@@ -4,11 +4,24 @@ import { AuthContext } from "../context/AuthContext";
 import { useMutation, gql } from "@apollo/client";
 import SnackBar from "../components/Snackbar";
 import { IS_AUTHENTICATED } from "..";
+import { ME } from "../context/UserContext";
 
 const LOGIN = gql`
   mutation($email: String, $password: String!) {
     tokenAuth(email: $email, password: $password) {
       token
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+        likeSet {
+          movie {
+            id
+          }
+        }
+      }
     }
   }
 `;
@@ -30,6 +43,9 @@ export default function Login() {
       variables: {
         email,
         password,
+      },
+      update: (cache, { data: { tokenAuth } }) => {
+        cache.writeQuery({ query: ME, data: { me: tokenAuth.user } });
       },
     });
     localStorage.setItem("authToken", res.data.tokenAuth.token);
@@ -64,10 +80,10 @@ export default function Login() {
                 <span className="btn-inner--icon">
                   <img
                     alt="github icon"
-                    src={require("../assets/img/icons/github.svg")}
+                    src={require("../assets/img/icons/facebook.svg")}
                   />
                 </span>
-                <span className="btn-inner--text">Github</span>
+                <span className="btn-inner--text">Facebook</span>
               </Button>
 
               <Button

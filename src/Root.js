@@ -11,7 +11,6 @@ import App from "./views/App";
 import { IS_AUTHENTICATED } from ".";
 import Profile from "./views/Profile";
 import UserProvider from "./context/UserContext";
-import Loader from "./components/Loader";
 
 function Root() {
   const { data } = useQuery(IS_AUTHENTICATED);
@@ -30,9 +29,6 @@ function Root() {
           </Route>
           <Route path={`/profile/:id`}>
             {data.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/movie">
-            <Loader />
           </Route>
           <Route path="/app">
             {data.isAuthenticated ? <App /> : <Redirect to="/login" />}

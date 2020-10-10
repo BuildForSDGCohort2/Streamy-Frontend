@@ -501,7 +501,7 @@ export default function Profile() {
                     handleDeleteAccount(event, deleteAccount)
                   }
                 >
-                  <h6 className="heading-small text-muted mb-4">
+                  <h6 className="heading-small mb-4 text-danger">
                     ENTER CURRENT PASSWORD TO CONFIRM DELETE
                   </h6>
                   <div className="pl-lg-4">
