@@ -119,6 +119,7 @@
 
       .btn-play {
         padding: 7px 10px;
+
         @include media(">phone", "<tablet") {
           padding: 7px 10px;
         }
