@@ -21,9 +21,7 @@ export const ME = gql`
 export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
-  const { loading: userLoading, error: userError, data } = useQuery(ME, {
-    fetchPolicy: "cache-and-network",
-  });
+  const { loading: userLoading, error: userError, data } = useQuery(ME);
 
   const currentUser = data?.me;
 

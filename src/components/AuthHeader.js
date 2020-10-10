@@ -12,7 +12,7 @@ export default function AuthHeader() {
             <Row className="justify-content-center">
               <Col lg="5" md="6">
                 <h1 className="text-white">Welcome to Streamy!</h1>
-                <p className="text-lead text-light">Use these form to {""}</p>
+                <p className="text-lead text-light">Use this form</p>
               </Col>
             </Row>
           </div>

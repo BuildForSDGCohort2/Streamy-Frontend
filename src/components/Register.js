@@ -1,8 +1,6 @@
 import React, { useState, useContext } from "react";
-
 import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
-import { useHistory } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const REGISTER_USER = gql`
@@ -46,9 +44,6 @@ export default function Register() {
   // change login state - defaults to "error"
   const { setStatus } = useContext(AuthContext);
 
-  // use history to redirect to login page on successful registration
-  const history = useHistory();
-
   const handleSubmit = async (event, register) => {
     event.preventDefault();
     await register({
@@ -63,8 +58,7 @@ export default function Register() {
     });
 
     setStatus("success");
-
-    history.push("/login");
+    window.location.href = "/login";
   };
 
   return (
@@ -83,8 +77,8 @@ export default function Register() {
               >
                 <span className="btn-inner--icon">
                   <img
-                    alt="github icon"
-                    src={require("../assets/img/icons/github.svg")}
+                    alt="Facebook icon"
+                    src={require("../assets/img/icons/facebook.svg")}
                   />
                 </span>
                 <span className="btn-inner--text">Facebook</span>

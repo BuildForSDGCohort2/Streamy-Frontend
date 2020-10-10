@@ -16,7 +16,6 @@ export default function AppHeader({ title, description, year, rating, cover }) {
     trailerUrl,
     setTrailerUrl,
     setShowMovie,
-    showMovie,
   } = useContext(PlayerContext);
 
   const handleTrailer = (title) => {
@@ -51,9 +50,23 @@ export default function AppHeader({ title, description, year, rating, cover }) {
                         .fill()
                         .map((_, i) => (
                           <p key={i}>
-                            <span role="img" aria-label="star">
+                            {/* <span role="img" aria-label="star">
                               ⭐
-                            </span>
+                            </span> */}
+                            <i
+                              className="fa fa-star"
+                              style={{ color: "#FFA500", fontSize: "14px" }}
+                            />
+                          </p>
+                        ))}
+                      {Array(5 - rating)
+                        .fill()
+                        .map((_, i) => (
+                          <p key={i}>
+                            <i
+                              className="fa fa-star"
+                              style={{ color: "#B0B0B0", fontSize: "14px" }}
+                            />
                           </p>
                         ))}
                     </div>
@@ -67,7 +80,9 @@ export default function AppHeader({ title, description, year, rating, cover }) {
                     <Button
                       className="btn-play"
                       type="submit"
-                      onClick={() => setShowMovie(true)}
+                      onClick={() => {
+                        setShowMovie(true);
+                      }}
                     >
                       <span className="btn-icon">
                         <i className="fa fa-play" />
@@ -90,8 +105,7 @@ export default function AppHeader({ title, description, year, rating, cover }) {
                     </span>
                     <span className="trailer-text">Watch Trailer</span>
                   </div>
-                  {trailerUrl || (showMovie && <Player />)}
-                  {/* <Player trailerUrl={trailerUrl} /> */}
+                  <Player />
                 </Col>
               </Row>
             </Container>

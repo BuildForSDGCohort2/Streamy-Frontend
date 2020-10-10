@@ -49,8 +49,6 @@ export default function Search({ setSearchResults }) {
       },
     });
 
-    console.log(res);
-
     setSearchResults(res.data.movies);
   };
 

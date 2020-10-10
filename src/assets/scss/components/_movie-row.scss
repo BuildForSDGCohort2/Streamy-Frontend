@@ -43,6 +43,9 @@
       height: 240px;
       font-size: 20px;
     }
+    @include media("<desktop") {
+      display: none;
+    }
   }
   .nav-prev {
     left: 0;
@@ -58,6 +61,10 @@
 
     @include media(">phone", "<tablet") {
       padding-left: 10px;
+      overflow-x: scroll;
+    }
+    @include media("<desktop") {
+      overflow-x: scroll;
     }
   }
   .list {
