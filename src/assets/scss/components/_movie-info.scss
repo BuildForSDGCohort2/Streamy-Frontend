@@ -1,20 +1,21 @@
 .wrap {
   position: relative;
   // display: flex;
-  display: inline-block;
-  width: 650px;
+  // display: inline-block;
+  min-width: 650px;
   height: 315px;
   background: #171a1f;
   border-radius: 5px;
   transition: all ease 0.5s;
   // margin-right: 10px;
   margin-left: -195px;
+  margin-top: 40px;
   padding: 0;
 
   @include media(">phone", "<tablet") {
-    width: 355px;
+    min-width: 355px;
     margin-left: -150px;
-    margin-top: 20px;
+    margin-top: 0px;
     z-index: 1;
     align-items: center;
     justify-content: center;
@@ -85,11 +86,12 @@
 
       .btn-trailer {
         cursor: pointer;
-        text-decoration: underline;
-        color: $primary;
+        text-decoration: $link-decoration;
+        color: $link-color;
 
         &:hover {
-          opacity: 0.7;
+          opacity: 0.9;
+          text-decoration: $link-hover-decoration;
         }
 
         .trailer-icon {
@@ -134,33 +136,6 @@
     }
   }
 }
-// .item-info-background {
-//   background: #171a1f;
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   right: 0;
-//   bottom: 0;
-//   width: 650px;
-//   height: 350px;
-//   z-index: -1;
-//   border-radius: 7px;
-//   transform: scale(0.9);
-//   transition: all ease 0.5s;
-// }
-
-// .wrap:hover {
-//   .single-movie-item {
-//     transform: translate(23%, -10%) scale(0.9);
-//   }
-//   .overlay {
-//     animation: movieTitle 0.5s forwards;
-//     opacity: 0;
-//   }
-//   .item-info-background {
-//     transform: scale(1);
-//   }
-// }
 
 @keyframes movieTitle {
   0% {

@@ -5,10 +5,6 @@
     margin-top: -150px;
   }
 
-  @include media(">tablet", "<desktop") {
-    margin-top: -200px;
-  }
-
   &:hover {
     .nav-prev,
     .nav-next {
@@ -45,7 +41,7 @@
       font-size: 20px;
     }
 
-    @include media("<desktop") {
+    @include media(">=tablet", "<desktop") {
       display: none;
     }
   }
@@ -61,23 +57,29 @@
     align-items: center;
     justify-content: center;
 
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+
     @include media(">phone", "<tablet") {
       padding-left: 10px;
-      overflow-x: scroll;
+      overflow-x: auto;
     }
 
     @include media("<desktop") {
-      overflow-x: scroll;
+      overflow-x: auto;
     }
   }
+
   .list {
     // width: 999999999px;
     transition: all ease 0.5s;
+    display: flex;
 
     .item {
       position: relative;
-      display: inline-block;
-      width: 200px;
+      // display: inline-block;
+      min-width: 200px;
       height: 350px;
       cursor: pointer;
       transform: scale(0.9);
@@ -97,7 +99,7 @@
       }
 
       @include media(">phone", "<tablet") {
-        width: 150px;
+        min-width: 150px;
         height: 250px;
         border-radius: 4px;
       }

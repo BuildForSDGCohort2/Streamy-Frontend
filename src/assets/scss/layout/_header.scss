@@ -60,10 +60,6 @@
         padding-left: 0px;
         padding-bottom: 100px;
       }
-      // @include media(">tablet", "<desktop") {
-      //   padding-left: 20px;
-      //   padding-bottom: 200px;
-      // }
 
       .title {
         font-size: 50px;
@@ -103,10 +99,8 @@
           color: $gray-300;
         }
 
-        @include media(">tablet", "<desktop") {
+        @include media(">=tablet", "<desktop") {
           max-width: 80%;
-          // margin-bottom: 30px;
-          // margin-top: 20px;
           font-size: 16px;
           color: $gray-300;
         }
@@ -157,11 +151,12 @@
       .btn-trailer {
         margin-top: 25px;
         cursor: pointer;
-        text-decoration: underline;
-        color: $primary;
+        text-decoration: $link-decoration;
+        color: $link-color;
 
         &:hover {
-          opacity: 0.7;
+          opacity: 0.9;
+          text-decoration: $link-hover-decoration;
         }
 
         .trailer-icon {

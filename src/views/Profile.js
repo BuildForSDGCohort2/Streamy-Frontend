@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { ME, UserContext } from "../context/UserContext";
 import AppNavbar from "../components/AppNavbar";
 import {
@@ -62,9 +62,14 @@ const DELETE_ACCOUNT = gql`
   }
 `;
 
+const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
 export default function Profile() {
   const { userLoading, userError, currentUser: user } = useContext(UserContext);
   const client = useApolloClient();
+
+  const editProfileRef = useRef(null);
+  const executeScroll = () => scrollToRef(editProfileRef);
 
   const [
     updateAccount,
@@ -140,7 +145,7 @@ export default function Profile() {
   return (
     <>
       <AppNavbar />
-      <ProfileHeader />
+      <ProfileHeader executeScroll={executeScroll} />
 
       <Container className="mt--7 profile" fluid>
         {updateStatus === "success" ? (
@@ -235,7 +240,7 @@ export default function Profile() {
             </Card>
           </Col>
 
-          <Col className="order-xl-1" xl="8">
+          <Col className="order-xl-1" xl="8" ref={editProfileRef}>
             <Card className=" shadow">
               <Card.Header className=" border-0" style={{ paddingTop: "30px" }}>
                 <Row className="align-items-center">

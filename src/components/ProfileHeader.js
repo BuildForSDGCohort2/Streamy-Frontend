@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { UserContext } from "../context/UserContext";
 
-export default function ProfileHeader() {
+export default function ProfileHeader({ executeScroll }) {
   const { currentUser: user } = useContext(UserContext);
   return (
     <>
@@ -25,7 +25,7 @@ export default function ProfileHeader() {
                 This is your profile page. You can see the progress you've made
                 with your work and manage your projects or assigned tasks
               </p>
-              <Button color="info" href="#" onClick={(e) => e.preventDefault()}>
+              <Button color="info" onClick={executeScroll}>
                 Edit profile
               </Button>
             </Col>

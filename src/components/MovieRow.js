@@ -10,16 +10,20 @@ export default function MovieRow({ movies }) {
       x = 0;
     }
     setScrollX(x);
+    console.log(scrollX);
   };
 
   const handleRightNav = () => {
     let x = scrollX - Math.round(window.innerWidth / 2);
-    let listW = movies?.length * window.innerWidth;
+    console.log("right - x", x);
+
+    let listW = movies?.length * 1500;
 
     if (window.innerWidth - listW > x) {
       x = window.innerWidth - listW - 60;
     }
     setScrollX(x);
+    console.log("right", scrollX);
   };
 
   return (
@@ -38,7 +42,7 @@ export default function MovieRow({ movies }) {
             className="list"
             style={{
               marginLeft: scrollX,
-              width: movies?.length * window.innerWidth,
+              // minWidth: movies?.length * (window.innerWidth / 1.5),
             }}
           >
             {movies?.length > 0 &&
