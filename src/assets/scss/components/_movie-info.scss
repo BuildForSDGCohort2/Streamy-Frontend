@@ -15,7 +15,7 @@
   @include media(">phone", "<tablet") {
     min-width: 355px;
     margin-left: -150px;
-    margin-top: 0px;
+    margin-top: 0;
     z-index: 1;
     align-items: center;
     justify-content: center;

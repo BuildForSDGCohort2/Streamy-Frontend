@@ -10,7 +10,7 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  background-color: rgba($color: #000000, $alpha: 1);
+  background-color: rgba($color: #000, $alpha: 1);
   margin: auto;
   z-index: 2000;
 
@@ -37,7 +37,7 @@
 
     .close-player {
       position: absolute;
-      top: 0px;
+      top: 0;
       width: 45px;
       border-radius: 50%;
       opacity: 0;
@@ -59,8 +59,9 @@
 @keyframes closeButton {
   0% {
     opacity: 0;
-    top: 0px;
+    top: 0;
   }
+
   20% {
     opacity: 0;
     top: 20px;
@@ -70,6 +71,7 @@
     opacity: 0;
     top: 40px;
   }
+
   100% {
     top: 60px;
     opacity: 1;

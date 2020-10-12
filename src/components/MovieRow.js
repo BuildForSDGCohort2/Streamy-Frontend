@@ -10,12 +10,10 @@ export default function MovieRow({ movies }) {
       x = 0;
     }
     setScrollX(x);
-    console.log(scrollX);
   };
 
   const handleRightNav = () => {
     let x = scrollX - Math.round(window.innerWidth / 2);
-    console.log("right - x", x);
 
     let listW = movies?.length * 1500;
 
@@ -23,7 +21,6 @@ export default function MovieRow({ movies }) {
       x = window.innerWidth - listW - 60;
     }
     setScrollX(x);
-    console.log("right", scrollX);
   };
 
   return (
