@@ -5,10 +5,14 @@
 }
 
 .header-signin-btn {
-  color: #fff !important;
+  color: $white !important;
   padding-top: 5px;
   border-radius: 5px;
   background: $primary;
+
+  @include media(">phone", "<tablet") {
+    padding: 7px 10px !important;
+  }
 }
 
 .app-navbar {

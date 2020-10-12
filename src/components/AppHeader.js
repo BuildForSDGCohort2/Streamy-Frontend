@@ -105,13 +105,13 @@ export default function AppHeader({ title, description, year, rating, cover }) {
                     </span>
                     <span className="trailer-text">Watch Trailer</span>
                   </div>
-                  <Player />
                 </Col>
               </Row>
             </Container>
           </div>
         </div>
       </div>
+      <Player />
     </>
   );
 }
