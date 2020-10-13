@@ -27,7 +27,7 @@ function Root() {
           <Route path="/register">
             <Auth />
           </Route>
-          <Route path={`/profile/:id`}>
+          <Route path={"/profile/:id"}>
             {data.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
           </Route>
           <Route path="/app">

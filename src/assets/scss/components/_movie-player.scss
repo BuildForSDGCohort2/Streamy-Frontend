@@ -16,12 +16,6 @@
 
   .movie-wrapper {
     // z-index: 1;
-    &:hover,
-    &:active {
-      .close-player {
-        animation: closeButton 0.5s forwards;
-      }
-    }
 
     .player {
       position: absolute;
@@ -51,6 +45,13 @@
 
       &:hover {
         opacity: 0.7;
+      }
+    }
+
+    &:hover,
+    &:active {
+      .close-player {
+        animation: closeButton 0.5s forwards;
       }
     }
   }

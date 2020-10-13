@@ -4,7 +4,9 @@
   img {
     max-width: 180px;
     border-radius: $border-radius;
+
     @extend .shadow;
+
     transform: translate(-50%, -30%);
     position: absolute;
     left: 50%;
@@ -33,6 +35,7 @@
       font-weight: bold;
       display: block;
     }
+
     .description {
       font-size: 0.875rem;
       color: $gray-500;

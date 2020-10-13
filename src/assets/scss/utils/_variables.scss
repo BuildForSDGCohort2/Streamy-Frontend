@@ -94,7 +94,7 @@ $pinterest: #bd081c !default;
 $youtube: #cd201f !default;
 $slack: #3aaf85 !default;
 $dribbble: #ea4c89 !default;
-$github: #222222 !default;
+$github: #222 !default;
 
 $theme-colors: () !default;
 $theme-colors: map-merge(
@@ -134,7 +134,7 @@ $shape-colors: () !default;
 $shape-colors: map-merge(
   (
     "default": #32325d,
-    "primary": #5533ff,
+    "primary": #53f,
     "secondary": #24b47e,
     "neutral": #e9ecef,
     "blue-gray": #b2cbe1,

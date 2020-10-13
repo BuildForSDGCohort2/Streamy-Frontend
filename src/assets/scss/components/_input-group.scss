@@ -14,10 +14,12 @@
       border-left: 0;
       padding-left: 0;
     }
+
     &:not(:last-child) {
       border-right: 0;
       padding-right: 0;
     }
+
     &:focus {
       box-shadow: none;
     }
@@ -32,23 +34,23 @@
 
 // Alternative input groups related to .form-control-alternative
 
-.input-group-alternative {
-  box-shadow: $input-alternative-box-shadow;
-  border: 0;
-  transition: box-shadow 0.15s ease;
+// .input-group-alternative {
+//   box-shadow: $input-alternative-box-shadow;
+//   border: 0;
+//   transition: box-shadow 0.15s ease;
 
-  .form-control,
-  .input-group-text {
-    border: 0;
-    box-shadow: none;
-  }
-}
+//   .form-control,
+//   .input-group-text {
+//     border: 0;
+//     box-shadow: none;
+//   }
+// }
 
-.focused {
-  .input-group-alternative {
-    box-shadow: $input-focus-alternative-box-shadow !important;
-  }
-}
+// .focused {
+//   .input-group-alternative {
+//     box-shadow: $input-focus-alternative-box-shadow !important;
+//   }
+// }
 
 // .focus class is applied dinamycally from theme.js
 
