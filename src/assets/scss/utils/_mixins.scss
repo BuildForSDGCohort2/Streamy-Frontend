@@ -1,7 +1,9 @@
 // alert
 @mixin alert-variant($background, $border, $color) {
   color: color-yiq($background);
+
   @include gradient-bg($background);
+
   border-color: $border;
 
   hr {
@@ -42,6 +44,7 @@
       @if $value != null {
         $result: append($result, $value, "comma");
       }
+
       @if $value == none and length($shadow) > 1 {
         @warn "The keyword 'none' must be used as a single argument.";
       }
@@ -65,11 +68,14 @@
   color: color-yiq($background);
   @include gradient-bg($background);
   border-color: $border;
+
   @include box-shadow($btn-box-shadow);
 
   @include hover {
     color: color-yiq($hover-background);
+
     @include gradient-bg($hover-background);
+
     border-color: $hover-border;
   }
 
@@ -94,9 +100,11 @@
   .show > &.dropdown-toggle {
     color: color-yiq($active-background);
     background-color: $active-background;
+
     @if $enable-gradients {
       background-image: none; // Remove the gradient for the pressed/active state
     }
+
     border-color: $active-border;
 
     &:focus {
@@ -268,6 +276,7 @@
       &:checked {
         ~ .custom-control-label::before {
           @include gradient-bg(lighten($color, 10%));
+
           border-color: lighten($color, 25%);
         }
       }
@@ -329,6 +338,7 @@
   $breakpoint-names: map-keys($breakpoints)
 ) {
   $n: index($breakpoint-names, $name);
+
   @return if(
     $n < length($breakpoint-names),
     nth($breakpoint-names, $n + 1),
@@ -342,6 +352,7 @@
 //    576px
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
   $min: map-get($breakpoints, $name);
+
   @return if($min != 0, $min, null);
 }
 
@@ -356,6 +367,7 @@
 //    767.98px
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
   $next: breakpoint-next($name, $breakpoints);
+
   @return if($next, breakpoint-min($next, $breakpoints) - 0.02px, null);
 }
 

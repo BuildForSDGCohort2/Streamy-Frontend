@@ -24,7 +24,8 @@ export default function AppHeader({ title, description, year, rating, cover }) {
         setTrailerUrl(url);
         setShowTrailer(trailerUrl ? true : false);
       })
-      .catch((error) => console.log(error));
+      .catch(() => {});
+    // .catch((error) => console.log(error));
   };
 
   return (

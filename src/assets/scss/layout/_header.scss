@@ -40,6 +40,7 @@
 
 .featured {
   height: 100vh;
+
   .gradient-vertical {
     width: inherit;
     height: inherit;
@@ -80,11 +81,13 @@
           padding-left: 15px;
         }
       }
+
       .year {
         @include media(">phone", "<tablet") {
           padding-top: -200px;
         }
       }
+
       .description {
         color: $gray-500;
         max-width: 54%;
@@ -105,6 +108,7 @@
           color: $gray-300;
         }
       }
+
       .buttonRow {
         display: flex;
 
@@ -112,10 +116,12 @@
           @include media(">phone", "<tablet") {
             padding: 7px 10px;
           }
+
           .btn-icon {
             padding: 10px 12px;
             font-size: 16px;
           }
+
           .btn-text {
             padding-right: 12px;
           }
@@ -139,15 +145,18 @@
           &:hover {
             opacity: 0.7;
           }
+
           .btn-icon {
             padding: 10px 12px;
             font-size: 16px;
           }
+
           .btn-text {
             padding-right: 12px;
           }
         }
       }
+
       .btn-trailer {
         margin-top: 25px;
         cursor: pointer;
@@ -164,6 +173,7 @@
           font-size: 16px;
           color: $primary;
         }
+
         .trailer-text {
           padding-right: 12px;
           font-size: 14px;
