@@ -38,9 +38,6 @@ function App() {
 
   const movies = searchResults.length > 0 ? searchResults : data?.movies;
 
-  // if (loading) return <Loader />;
-  // if (error) return <Error message={error.message} />;
-
   return (
     <div className="main-content">
       <AppNavbar setSearchResults={setSearchResults} />

@@ -11,8 +11,9 @@ import App from "./views/App";
 import { IS_AUTHENTICATED } from ".";
 import Profile from "./views/Profile";
 import UserProvider from "./context/UserContext";
+import ProfileProvider from "./context/ProfileContext";
 
-function Root() {
+export default function Root() {
   const { data } = useQuery(IS_AUTHENTICATED);
 
   const handleRedirect = () => {
@@ -22,13 +23,14 @@ function Root() {
   return (
     <Router>
       <UserProvider>
+
         <Switch>
           <Route path="/login">{handleRedirect}</Route>
           <Route path="/register">
             <Auth />
           </Route>
           <Route path={"/profile/:id"}>
-            {data.isAuthenticated ? <Profile /> : <Redirect to="/login" />}
+            {data.isAuthenticated ? <ProfileProvider><Profile /></ProfileProvider> : <Redirect to="/login" />}
           </Route>
           <Route path="/app">
             {data.isAuthenticated ? <App /> : <Redirect to="/login" />}
@@ -41,5 +43,3 @@ function Root() {
     </Router>
   );
 }
-
-export default Root;

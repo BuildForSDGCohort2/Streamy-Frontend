@@ -1,9 +1,10 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import Root from "./Root";
+import { shallow } from "enzyme";
+import App from "./views/App";
 
-test("renders learn react link", () => {
-  const { getByText } = render(<Root />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+test("renders without crashing", () => {
+  shallow(<App />)
+})
+

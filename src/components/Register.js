@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Card, Form, InputGroup, Row, Col } from "react-bootstrap";
 import { gql, useMutation } from "@apollo/client";
 import { AuthContext } from "../context/AuthContext";
+import AuthFormHeader from "./AuthFormHeader";
 
 const REGISTER_USER = gql`
   mutation(
@@ -65,40 +66,9 @@ export default function Register() {
     <>
       <Col lg="8" md="12">
         <Card className="border-0">
-          <Card.Header className="bg-transparent pb-5">
-            <div className="text-center mt-2 mb-3">
-              <small>Sign in with</small>
-            </div>
-            <div className="btn-wrapper text-center">
-              <Button
-                className="btn-neutral btn-icon mr-3"
-                color="neutral"
-                href="#streamy"
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="Facebook icon"
-                    src={require("../assets/img/icons/facebook.svg")}
-                  />
-                </span>
-                <span className="btn-inner--text">Facebook</span>
-              </Button>
+          
+          <AuthFormHeader />
 
-              <Button
-                className="btn-neutral btn-icon"
-                color="neutral"
-                href="#streamy"
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="google icon"
-                    src={require("../assets/img/icons/google.svg")}
-                  />
-                </span>
-                <span className="btn-inner--text">Google</span>
-              </Button>
-            </div>
-          </Card.Header>
           <Card.Body className="px-lg-5 py-lg-5">
             {mutationError && (
               <div className="text-danger mb-3">{mutationError.message}</div>
