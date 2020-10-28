@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { Button, Card, Col, Form, InputGroup, Row } from 'react-bootstrap'
-import { gql, useMutation } from '@apollo/client';
-import { ME, UserContext } from '../context/UserContext';
-import UserInfo from './UserInfo'
-import { ProfileContext } from '../context/ProfileContext';
+import React, { useContext, useState } from "react";
+import { Button, Card, Col, Form, InputGroup, Row } from "react-bootstrap";
+import { gql, useMutation } from "@apollo/client";
+import { ME, UserContext } from "../context/UserContext";
+import UserInfo from "./UserInfo";
+import { ProfileContext } from "../context/ProfileContext";
 
 const UPDATE_ACCOUNT = gql`
   mutation($firstname: String, $lastname: String, $email: String) {
@@ -21,7 +21,7 @@ const UPDATE_ACCOUNT = gql`
 
 export default function EditProfile({ editProfileRef }) {
   const { currentUser: user } = useContext(UserContext);
-  const { setUpdateStatus } = useContext(ProfileContext)
+  const { setUpdateStatus } = useContext(ProfileContext);
 
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -70,13 +70,11 @@ export default function EditProfile({ editProfileRef }) {
               )}
 
               <Form
-                onSubmit={(event) =>
-                  handleAccountUpdate(event, updateAccount)
-                }
+                onSubmit={(event) => handleAccountUpdate(event, updateAccount)}
               >
                 <h6 className="heading-small text-muted mb-4">
                   USER INFORMATION
-                  </h6>
+                </h6>
                 <div className="pl-lg-4">
                   <Row>
                     <Col xs="6">
@@ -86,7 +84,7 @@ export default function EditProfile({ editProfileRef }) {
                           htmlFor="input-username"
                         >
                           Firstname
-                          </label>
+                        </label>
                         <InputGroup>
                           <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -112,7 +110,7 @@ export default function EditProfile({ editProfileRef }) {
                           htmlFor="input-username"
                         >
                           Lastname
-                          </label>
+                        </label>
                         <InputGroup>
                           <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -141,7 +139,7 @@ export default function EditProfile({ editProfileRef }) {
                           htmlFor="input-username"
                         >
                           Email
-                          </label>
+                        </label>
                         <InputGroup>
                           <InputGroup.Prepend>
                             <InputGroup.Text>
@@ -177,5 +175,5 @@ export default function EditProfile({ editProfileRef }) {
         </Col>
       </Row>
     </>
-  )
+  );
 }

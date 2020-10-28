@@ -12,12 +12,11 @@ import EditProfile from "../components/EditProfile";
 import PasswordChange from "../components/PasswordChange";
 import { ProfileContext } from "../context/ProfileContext";
 
-
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 
 export default function Profile() {
   const { userLoading, userError } = useContext(UserContext);
-  const { updateStatus } = useContext(ProfileContext)
+  const { updateStatus } = useContext(ProfileContext);
 
   const editProfileRef = useRef(null);
   const executeScroll = () => scrollToRef(editProfileRef);
