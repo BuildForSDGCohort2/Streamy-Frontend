@@ -66,7 +66,9 @@
   $active-border: darken($border, 0%)
 ) {
   color: color-yiq($background);
+
   @include gradient-bg($background);
+
   border-color: $border;
 
   @include box-shadow($btn-box-shadow);
@@ -177,6 +179,7 @@
   padding: $padding-y $padding-x;
   font-size: $font-size;
   line-height: $line-height; // Manually declare to provide an override to the browser default
+
   @if $enable-rounded {
     border-radius: $border-radius;
   } @else {
@@ -386,6 +389,7 @@
 // Makes the @content apply to the given breakpoint and wider.
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
+
   @if $min {
     @media (min-width: $min) {
       @content;
@@ -399,6 +403,7 @@
 // Makes the @content apply to the given breakpoint and narrower.
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
   $max: breakpoint-max($name, $breakpoints);
+
   @if $max {
     @media (max-width: $max) {
       @content;
